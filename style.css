@@ -1,0 +1,722 @@
+:root {
+    --vinho-profundo: #3a0104;
+    --gold: #fac900;
+    --white: #FFFFFF;
+    --green-wpp: #25D366;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: var(--vinho-profundo);
+    color: var(--white);
+    overflow-x: hidden;
+}
+
+/* Container ajustado para ficar mais à esquerda nas telas grandes */
+.container-full {
+    max-width: 100%;
+    padding: 0 5%; /* Isso garante que o texto comece perto da borda esquerda */
+}
+
+/* --- HEADER E MENU (Desktop e Mobile Corrigido) --- */
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 25px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- LOGO PREFERENCIAL PREMIUM (CORREÇÃO DE FONTE E PROPORÇÃO) --- */
+.logo { 
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Espaço entre o ícone e o texto */
+    position: relative; 
+    z-index: 2500;
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 75px; /* Aumentado para equilibrar com as duas linhas de texto */
+    width: auto;
+    object-fit: contain;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 0.8; /* Aproxima as linhas como no original */
+}
+
+.main-name {
+    font-family: 'Outfit', sans-serif; /* Fonte arredondada idêntica à da cliente */
+    font-size: 2.4rem; /* Tamanho robusto */
+    font-weight: 800; 
+    color: var(--white);
+    letter-spacing: -1px; /* Ajuste fino de proximidade das letras */
+}
+
+.sub-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--white);
+    text-transform: lowercase;
+    letter-spacing: 7.2px; /* Espaçamento amplo característico da marca */
+    margin-top: 6px;
+    display: block;
+    width: 100%;
+}
+
+/* Responsividade da Logo */
+@media (max-width: 768px) {
+    .logo-img { height: 55px; }
+    .main-name { font-size: 1.8rem; letter-spacing: -0.5px; }
+    .sub-name { font-size: 0.68rem; letter-spacing: 4.8px; margin-top: 4px; }
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none; color: var(--white);
+    font-weight: 600; font-size: 0.9rem; transition: 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.btn-top-wpp {
+    background: var(--green-wpp); color: white !important;
+    padding: 10px 20px; border-radius: 50px; font-weight: 800 !important;
+}
+
+.hamburger {
+    display: none; cursor: pointer; background: none; border: none;
+    z-index: 2000; padding: 10px;
+}
+
+.hamburger span {
+    display: block; width: 28px; height: 3px; background: var(--white);
+    margin: 5px 0; transition: 0.4s; border-radius: 2px;
+}
+
+/* MENU MOBILE COM EFEITO VIDRO REAL */
+@media (max-width: 768px) {
+    .hamburger { display: block; }
+
+    .nav-links {
+        position: fixed; top: 0; right: -100%; 
+        width: 100%; height: 100vh;
+        /* EFEITO GLASS: Transparência + Desfoque Pesado */
+        background: rgba(45, 6, 6, 0.45); 
+        backdrop-filter: blur(25px) saturate(180%);
+        -webkit-backdrop-filter: blur(25px) saturate(180%);
+        
+        flex-direction: column; justify-content: center;
+        align-items: center; gap: 35px;
+        transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        z-index: 1500; /* Abaixo da logo (2000) mas acima do site */
+    }
+
+    .nav-links.active { right: 0; }
+
+    .nav-links a { 
+        font-size: 1.6rem; font-weight: 900; 
+        letter-spacing: 3px; text-transform: uppercase;
+        text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+
+    .nav-links .btn-top-wpp {
+        padding: 15px 45px; font-size: 1.1rem;
+        box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+    }
+
+    .menu-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.3); opacity: 0; visibility: hidden;
+        transition: 0.5s; z-index: 1400;
+    }
+    .menu-overlay.active { opacity: 1; visibility: visible; }
+
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+}
+
+/* HERO SECTION */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background-image: url('hero-aluno.png');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+
+/* Overlay para garantir que o texto apareça sobre a imagem */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(58, 1, 4, 1) 20%, rgba(58, 1, 4, 0.6) 50%, rgba(58, 1, 4, 0) 90%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 750px;
+    margin-left: 0; /* Garante que não está centralizado */
+}
+
+.hero-content h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 0.9; }
+.hero-content h1 span { color: var(--gold); display: block; }
+.hero-content .subtitle { font-size: 1.8rem; margin: 15px 0; font-weight: 800; }
+.hero-content .tagline { font-size: 1.2rem; color: var(--gold); margin-bottom: 40px; }
+
+/* NOVO PAINEL DE PREÇOS (ESTILO IMAGEM CLIENTE) */
+.pricing-bar-wrapper {
+    margin-top: 40px;
+}
+
+.pricing-bar {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(45, 6, 6, 0.8); /* Vinho bem escuro com transparência */
+    border: 1.5px solid #7a1a1a; /* Borda vinho um pouco mais clara */
+    border-radius: 25px; /* Bordas arredondadas estilo pílula */
+    padding: 20px 40px;
+    gap: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-decoration: none;
+}
+
+.price-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.3s;
+}
+
+.price-item:hover {
+    transform: translateY(-5px);
+}
+
+.price-icon img {
+    width: 45px;
+    filter: invert(1); /* Deixa os ícones brancos */
+}
+
+.price-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* NOVO: Estilo do mini botão de CTA */
+.btn-mini-cta {
+    background: var(--white);
+    color: var(--vinho-profundo);
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 5px 12px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    display: inline-block;
+    width: fit-content;
+    transition: 0.3s;
+}
+
+.price-item:hover .btn-mini-cta {
+    background: var(--gold);
+    color: #000;
+}
+
+.price-info .label {
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.price-info .sub-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 2px 0;
+}
+
+.price-value {
+    color: var(--gold);
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.price-value span {
+    font-size: 1.1rem;
+    vertical-align: middle;
+}
+
+/* Divisória vertical no meio */
+.divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, #7a1a1a, transparent);
+}
+
+/* Ajuste Mobile para a barra não quebrar */
+@media (max-width: 768px) {
+    .pricing-bar {
+        flex-direction: column;
+        padding: 30px;
+        gap: 20px;
+        width: 100%;
+    }
+    .divider {
+        width: 80%;
+        height: 1px;
+    }
+}
+
+/* DOBRA 2: SOCIAL PROOF PREMIUM */
+.social-proof {
+    background: #1a0001; /* Preto puxado para o vinho */
+    padding: 80px 0;
+    border-top: 1px solid rgba(250, 201, 0, 0.2);
+    border-bottom: 1px solid rgba(250, 201, 0, 0.2);
+    position: relative;
+}
+
+.proof-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Força 4 colunas no desktop */
+    gap: 20px; /* Reduzido para aproximar os cards */
+    align-items: center;
+    text-align: center;
+}
+
+.proof-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(250, 201, 0, 0.6);
+    border-radius: 15px; /* Bordas um pouco mais finas */
+    padding: 20px 15px; /* Reduzi bastante o espaço interno */
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    min-height: 180px; /* Bem mais baixo que o anterior */
+}
+
+.proof-item:hover { transform: translateY(-5px); }
+
+.proof-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+
+.proof-number {
+    font-size: 2.2rem; /* Fonte menor e mais elegante */
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 5px;
+}
+
+.proof-item p {
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    color: var(--white);
+    text-transform: uppercase;
+}
+
+/* Estilo Especial Google (Ajuste de respiro interno) */
+.google-stars {
+    padding: 30px 20px !important;
+}
+
+.google-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.google-logo span { font-weight: 600; font-size: 0.8rem; opacity: 0.8; }
+
+.stars {
+    color: #ffc107;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(255, 193, 7, 0.4);
+}
+
+.google-stars small {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.65rem;
+    opacity: 0.6;
+    letter-spacing: 1px;
+}
+
+/* DOBRA 3: DIFERENCIAIS PREMIUM (IMPACTO) */
+.why-premium {
+    padding: 120px 0;
+    background: #2a0103;
+    position: relative;
+}
+
+.premium-layout {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.premium-text-side { flex: 1.2; }
+.premium-image-side { flex: 0.8; }
+
+.top-tag {
+    color: var(--gold);
+    font-weight: 800;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.premium-text-side h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 40px;
+}
+
+.premium-text-side h2 span { color: var(--gold); }
+
+.premium-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.premium-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.premium-card:hover {
+    background: rgba(250, 201, 0, 0.05);
+    border-color: var(--gold);
+    transform: translateY(-5px);
+}
+
+.card-icon { font-size: 2rem; margin-bottom: 15px; }
+
+.premium-card h4 {
+    color: var(--gold);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.premium-card p { font-size: 0.9rem; opacity: 0.7; line-height: 1.4; }
+
+.image-container { position: relative; width: 100%; }
+
+.main-img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    border: 1px solid rgba(250, 201, 0, 0.3);
+}
+
+.experience-badge {
+    position: absolute;
+    top: 30px;
+    right: -20px;
+    background: var(--gold);
+    color: #000;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+.experience-badge strong { font-size: 2rem; display: block; line-height: 1; }
+.experience-badge span { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
+
+/* DOBRA 4: ROADMAP DA CNH */
+.roadmap {
+    padding: 100px 0;
+    background: #1a0001; /* Fundo mais escuro para contraste */
+}
+
+.roadmap-header { text-align: center; margin-bottom: 60px; }
+.step-tag { color: var(--gold); font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; }
+.roadmap-header h2 { font-size: 2.8rem; font-family: 'Outfit', sans-serif; font-weight: 900; margin-top: 10px; }
+.roadmap-header h2 span { color: var(--gold); }
+
+.roadmap-container {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+.roadmap-image { flex: 1; }
+.img-road {
+    width: 100%;
+    border-radius: 30px;
+    border-left: 5px solid var(--gold); /* Detalhe lateral elegante */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.roadmap-steps {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+}
+
+/* Linha vertical que conecta os passos */
+.roadmap-steps::before {
+    content: '';
+    position: absolute;
+    left: 25px;
+    top: 10px;
+    width: 2px;
+    height: 90%;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    opacity: 0.3;
+}
+
+.step-item {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    position: relative;
+}
+
+.step-number {
+    min-width: 50px;
+    height: 50px;
+    background: var(--gold);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2rem;
+    font-family: 'Outfit', sans-serif;
+    z-index: 2;
+    box-shadow: 0 0 15px rgba(250, 201, 0, 0.4);
+}
+
+.step-info h3 {
+    font-family: 'Outfit', sans-serif;
+    color: var(--gold);
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.step-info p { opacity: 0.8; font-size: 1rem; }
+
+/* WHATSAPP FIXO */
+.wpp-fixed { position: fixed; bottom: 30px; right: 30px; z-index: 1000; width: 60px; height: 60px; }
+.wpp-fixed img { width: 100%; position: relative; z-index: 2; }
+.pulse { position: absolute; width: 100%; height: 100%; background: var(--green-wpp); border-radius: 50%; animation: pulse 2s infinite; z-index: 1; }
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ============================================================
+   SISTEMA DE ANIMAÇÕES (SÓ FUNCIONA SE O JS ESTIVER RODANDO)
+   ============================================================ */
+
+/* Estado inicial (escondido) */
+.reveal-left { opacity: 0; transform: translateX(-100px); transition: 1.2s ease-out; }
+.reveal-bottom { opacity: 0; transform: translateY(80px); transition: 1s ease-out; }
+
+/* Adiciona um atraso para o segundo card subir depois do primeiro */
+.pricing-cards .card:nth-child(2) { transition-delay: 0.3s; }
+
+/* Estado final (quando a classe .active for adicionada pelo JS) */
+.active { opacity: 1 !important; transform: translate(0, 0) !important; }
+
+/* ============================================================
+   AJUSTES EXCLUSIVOS PARA MOBILE (CELULAR)
+   ============================================================ */
+@media (max-width: 768px) {
+    
+    /* 1. Troca a imagem de fundo para a versão mobile */
+    .hero {
+        background-image: url('hero-mobile.png');
+        background-position: center top; /* Foca no topo da imagem onde está o rosto */
+        padding-top: 120px; /* Dá espaço para o cabeçalho não cobrir o texto */
+        align-items: flex-start; /* Joga o conteúdo para o topo no mobile */
+    }
+
+    /* 2. Escurece um pouco mais o fundo no mobile para o texto brilhar */
+    .hero::before {
+        background: linear-gradient(to bottom, 
+            rgba(58, 1, 4, 0.9) 10%, 
+            rgba(58, 1, 4, 0.6) 50%, 
+            rgba(58, 1, 4, 0.9) 90%
+        );
+    }
+
+    /* 3. Ajuste do Cabeçalho (Logo e Botão) */
+    header { padding: 15px 0; }
+    nav { flex-direction: row; justify-content: space-between; }
+    
+    .logo { font-size: 1.1rem; max-width: 150px; } /* Logo menor */
+    .btn-top-wpp { 
+        padding: 8px 15px; 
+        font-size: 0.7rem; 
+        text-align: center;
+    }
+
+    /* 4. Ajuste dos Textos (Mantendo à esquerda como pedido) */
+    .hero-content {
+        padding: 0 10px;
+        text-align: left; /* Garante alinhamento à esquerda */
+    }
+
+    .hero-content h1 { 
+        font-size: 2.8rem; /* Diminui para não quebrar feio */
+        line-height: 1;
+    }
+
+    .hero-content .subtitle { 
+        font-size: 1.2rem; 
+        margin: 10px 0;
+    }
+
+    .hero-content .tagline { 
+        font-size: 0.9rem; 
+        margin-bottom: 30px;
+    }
+
+    /* 5. Ajuste do Painel de Preços (Agora Quadradinho e Compacto) */
+    .pricing-bar {
+        flex-direction: column; 
+        padding: 20px; /* Reduzi o espaço interno */
+        gap: 20px;
+        width: fit-content; /* A MÁGICA: O fundo só ocupa o espaço do texto */
+        display: inline-flex; 
+        align-items: flex-start;
+        border-radius: 30px; /* Bordas mais arredondadas como na imagem */
+        margin-left: 0; /* Garante que fique colado na esquerda */
+    }
+
+    /* Diminuindo um pouco os ícones no mobile para caber melhor */
+    .price-icon img {
+        width: 35px;
+    }
+
+    /* Ajuste no valor e no CTA para o celular */
+    .price-value {
+        font-size: 1.6rem;
+    }
+
+    .btn-mini-cta {
+        font-size: 0.6rem;
+        padding: 4px 10px;
+        margin-top: 8px;
+    }
+
+    .price-item { width: 100%; }
+
+    .price-value { font-size: 1.8rem; } /* Preço um pouco menor no celular */
+
+    .divider {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #7a1a1a, transparent);
+    }
+
+    /* 6. Dobra 2 Mobile (Grid 2x2) */
+    .social-proof { padding: 40px 0; } /* Seção mais curta no mobile */
+    
+    .proof-grid {
+        grid-template-columns: 1fr 1fr; /* Mágica: 2 colunas no celular */
+        gap: 12px; /* Espaço pequeno entre os cards */
+    }
+
+    .proof-item {
+        min-height: 150px;
+        padding: 15px 10px;
+    }
+
+    .proof-number { font-size: 1.8rem; }
+    .proof-item p { font-size: 0.65rem; }
+    .stars { font-size: 1.2rem; }
+    .google-stars small { display: none; } /* Esconde o texto pequeno pra ganhar espaço */
+
+    /* Ajustes Dobra 3 Mobile Premium (Grid 2x2) */
+    .why-premium { padding: 50px 0; }
+    .premium-layout { flex-direction: column; gap: 25px; }
+    .premium-text-side h2 { font-size: 1.8rem; text-align: center; margin-bottom: 25px; }
+    
+    .premium-grid { 
+        grid-template-columns: 1fr 1fr; /* Força 2 colunas no celular */
+        gap: 12px; 
+    }
+
+    .premium-card {
+        padding: 15px 10px;
+        text-align: center;
+    }
+
+    .card-icon { font-size: 1.5rem; margin-bottom: 10px; }
+    .premium-card h4 { font-size: 0.9rem; }
+    .premium-card p { font-size: 0.75rem; }
+
+    .premium-image-side { order: -1; width: 100%; }
+    .main-img { height: 280px; }
+    .experience-badge { right: 10px; top: -15px; padding: 10px; }
+    .experience-badge strong { font-size: 1.2rem; }
+    
+    /* Ajustes Dobra 4 Mobile */
+    .roadmap { padding: 60px 0; }
+    .roadmap-header h2 { font-size: 1.8rem; }
+    .roadmap-container { flex-direction: column; gap: 40px; }
+    .roadmap-steps::before { left: 20px; }
+    .step-number { min-width: 40px; height: 40px; font-size: 1rem; }
+    .step-item { gap: 15px; }
+    .step-info h3 { font-size: 1.1rem; }
+    .step-info p { font-size: 0.85rem; }
+}
