@@ -687,18 +687,18 @@ nav {
     /* Escala Premium Mobile - Impacto Máximo */
     .main-title { 
         line-height: 0.82 !important; 
-        max-width: 75% !important; /* Aumentei um pouco a área do texto */
+        max-width: 85% !important; /* Aumentado para comportar o texto maior sem quebras indesejadas */
         margin-bottom: 12px !important;
     }
     
-    .txt-small { font-size: 1.1rem !important; letter-spacing: 1px !important; }
+    .txt-small { font-size: 1.3rem !important; letter-spacing: 1px !important; }
     .txt-massive { 
-        font-size: 3.8rem !important; /* CNH agora com destaque real */
+        font-size: 4.8rem !important; /* Aumentado para impacto máximo no CNH */
         letter-spacing: -2px !important; 
     }
-    .txt-medium { font-size: 1.4rem !important; }
+    .txt-medium { font-size: 1.7rem !important; }
     .txt-large { 
-        font-size: 3rem !important; /* APROVA agora com peso de cartaz */
+        font-size: 3.8rem !important; /* Aumentado para impacto máximo no APROVA */
         letter-spacing: -1px !important; 
     }
 
@@ -711,7 +711,7 @@ nav {
 
     /* 5. Ajuste do Painel de Preços (Agora Quadradinho e Compacto) */
     .pricing-bar-wrapper {
-        margin-top: 100px; /* Aumenta o espaço superior para aproximar o card da base no mobile */
+        margin-top: 180px; /* Aumentado para empurrar o card mais para baixo na tela do celular */
     }
 
     .pricing-bar {
