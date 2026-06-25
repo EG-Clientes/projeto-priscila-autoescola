@@ -1,6 +1,7 @@
 :root {
-    --vinho-profundo: #3a0104;
-    --gold: #fac900;
+    /* Tom 'Ameixa Imperial' - O ajuste final de 2% para puxar levemente ao roxo */
+    --vinho-profundo: #2a0020; 
+    --gold: #ffcc00;
     --white: #FFFFFF;
     --green-wpp: #25D366;
 }
@@ -13,7 +14,7 @@
 }
 
 body {
-    background-color: var(--vinho-profundo);
+    background-color: #000000; /* Fundo agora é Preto como no exemplo */
     color: var(--white);
     overflow-x: hidden;
 }
@@ -173,12 +174,15 @@ nav {
     background-repeat: no-repeat;
 }
 
-/* Overlay para garantir que o texto apareça sobre a imagem */
+/* Degradê com o tom de roxo ajustado na opacidade correta */
 .hero::before {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(to right, rgba(58, 1, 4, 1) 20%, rgba(58, 1, 4, 0.6) 50%, rgba(58, 1, 4, 0) 90%);
+    background: linear-gradient(to right, 
+        rgba(42, 0, 32, 0.9) 0%, 
+        rgba(42, 0, 32, 0.4) 60%, 
+        transparent 100%);
     z-index: 1;
 }
 
@@ -189,10 +193,62 @@ nav {
     margin-left: 0; /* Garante que não está centralizado */
 }
 
-.hero-content h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 0.9; }
-.hero-content h1 span { color: var(--gold); display: block; }
-.hero-content .subtitle { font-size: 1.8rem; margin: 15px 0; font-weight: 800; }
-.hero-content .tagline { font-size: 1.2rem; color: var(--gold); margin-bottom: 40px; }
+/* EFEITO CARTAZ DE CINEMA - REFINADO */
+.main-title {
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+    line-height: 0.82; /* Aumentado levemente para não encavalar */
+    font-weight: 900;
+    margin-bottom: 30px;
+    max-width: 650px; /* Limita a largura para o texto não invadir o carro */
+}
+
+.main-title span { display: block; }
+
+.txt-white { color: var(--white); }
+.txt-gold { color: #f37021; } 
+
+.txt-small { font-size: clamp(1.2rem, 2vw, 1.8rem); letter-spacing: 3px; }
+.txt-massive { 
+    font-size: clamp(4.5rem, 10vw, 8.5rem); /* Reduzido levemente para enquadrar */
+    letter-spacing: -4px; 
+    margin-left: -4px; 
+}
+.txt-medium { font-size: clamp(1.5rem, 3vw, 2.5rem); letter-spacing: -1px; }
+.txt-large { font-size: clamp(3rem, 7vw, 5.8rem); letter-spacing: -2px; }
+
+/* Ajuste específico para o Mobile */
+@media (max-width: 768px) {
+    .main-title { 
+        line-height: 0.9; /* Um pouco mais de respiro para não encavalar no celular */
+        max-width: 60%; /* Força o texto a ficar bem recuado na esquerda */
+        margin-bottom: 10px;
+    }
+    .txt-small { font-size: 0.75rem; letter-spacing: 1px; }
+    .txt-massive { font-size: 2.4rem; letter-spacing: -1px; }
+    .txt-medium { font-size: 0.9rem; }
+    .txt-large { font-size: 1.8rem; letter-spacing: -1px; }
+    
+    /* Garante que o bloco de conteúdo do hero não centralize no mobile */
+    .hero-content {
+        align-items: flex-start;
+        text-align: left;
+        padding-left: 15px;
+    }
+    
+    /* Tagline ajustada para mobile */
+    .hero-content .tagline { font-size: 0.85rem; max-width: 70%; line-height: 1.2; }
+}
+/* Tagline Desktop - Ajustada para não conflitar com Mobile */
+.hero-content .tagline { 
+    font-size: 1.1rem; 
+    color: var(--gold); 
+    margin-top: 15px; 
+    margin-bottom: 30px; 
+    font-weight: 600;
+    opacity: 0.95;
+}
 
 /* NOVO PAINEL DE PREÇOS (ESTILO IMAGEM CLIENTE) */
 .pricing-bar-wrapper {
@@ -300,35 +356,35 @@ nav {
     }
 }
 
-/* DOBRA 2: SOCIAL PROOF PREMIUM */
+/* DOBRA 2: SOCIAL PROOF PREMIUM - AJUSTE DE FLUXO */
 .social-proof {
-    background: #1a0001; /* Preto puxado para o vinho */
-    padding: 80px 0;
-    border-top: 1px solid rgba(250, 201, 0, 0.2);
-    border-bottom: 1px solid rgba(250, 201, 0, 0.2);
+    background: #000000; 
+    padding: 30px 0 0 0; /* 30px no topo e 0 na base para colar na próxima */
+    border-top: 1px solid rgba(250, 201, 0, 0.1);
+    border-bottom: 1px solid rgba(250, 201, 0, 0.1);
     position: relative;
 }
 
 .proof-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Força 4 colunas no desktop */
-    gap: 20px; /* Reduzido para aproximar os cards */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
     align-items: center;
     text-align: center;
 }
 
 .proof-item {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(250, 201, 0, 0.6);
-    border-radius: 15px; /* Bordas um pouco mais finas */
-    padding: 20px 15px; /* Reduzi bastante o espaço interno */
+    background: var(--vinho-profundo); /* Cor Ameixa dentro do Card */
+    border: 1px solid rgba(250, 201, 0, 0.3);
+    border-radius: 15px;
+    padding: 20px 15px;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    min-height: 180px; /* Bem mais baixo que o anterior */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    min-height: 180px;
 }
 
 .proof-item:hover { transform: translateY(-5px); }
@@ -384,15 +440,21 @@ nav {
 
 /* DOBRA 3: DIFERENCIAIS PREMIUM (IMPACTO) */
 .why-premium {
-    padding: 120px 0;
-    background: #2a0103;
+    padding: 30px 0 0 0; /* 30px no topo e 0 na base para manter o padrão */
+    background: #000000; 
     position: relative;
 }
 
+/* SUPER CARD DA SESSÃO (COR AMEIXA) */
 .premium-layout {
     display: flex;
     align-items: center;
     gap: 60px;
+    background: var(--vinho-profundo); 
+    padding: 60px 5%;
+    border-radius: 40px; 
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Borda muito sutil */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
 .premium-text-side { flex: 1.2; }
@@ -423,16 +485,17 @@ nav {
     gap: 20px;
 }
 
+/* MINI CARDS INTERNOS (TAMBÉM AMEIXA, MAS COM DESTAQUE DE BORDA) */
 .premium-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03); /* Leve transparência sobre o Ameixa */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda que separa do fundo */
     padding: 25px;
     border-radius: 20px;
     transition: 0.3s;
 }
 
 .premium-card:hover {
-    background: rgba(250, 201, 0, 0.05);
+    background: rgba(255, 255, 255, 0.06);
     border-color: var(--gold);
     transform: translateY(-5px);
 }
@@ -477,19 +540,25 @@ nav {
 
 /* DOBRA 4: ROADMAP DA CNH */
 .roadmap {
-    padding: 100px 0;
-    background: #1a0001; /* Fundo mais escuro para contraste */
+    padding: 30px 0 80px 0; /* Padronizado com 30px no topo para igualar as outras */
+    background: #000000; 
 }
 
-.roadmap-header { text-align: center; margin-bottom: 60px; }
+.roadmap-header { text-align: center; margin-bottom: 40px; }
 .step-tag { color: var(--gold); font-weight: 800; letter-spacing: 2px; font-size: 0.8rem; }
 .roadmap-header h2 { font-size: 2.8rem; font-family: 'Outfit', sans-serif; font-weight: 900; margin-top: 10px; }
 .roadmap-header h2 span { color: var(--gold); }
 
+/* SUPER CARD ROADMAP (COR AMEIXA) */
 .roadmap-container {
     display: flex;
     align-items: center;
-    gap: 80px;
+    gap: 60px;
+    background: var(--vinho-profundo); /* Nossa cor de elite */
+    padding: 60px 5%;
+    border-radius: 40px; 
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
 .roadmap-image { flex: 1; }
@@ -589,12 +658,12 @@ nav {
         align-items: flex-start; /* Joga o conteúdo para o topo no mobile */
     }
 
-    /* 2. Escurece um pouco mais o fundo no mobile para o texto brilhar */
+    /* 2. Degradê mobile com o ajuste fino para o roxo */
     .hero::before {
         background: linear-gradient(to bottom, 
-            rgba(58, 1, 4, 0.9) 10%, 
-            rgba(58, 1, 4, 0.6) 50%, 
-            rgba(58, 1, 4, 0.9) 90%
+            rgba(42, 0, 32, 0.8) 0%, 
+            rgba(42, 0, 32, 0.3) 50%, 
+            rgba(42, 0, 32, 0.8) 100%
         );
     }
 
@@ -615,19 +684,29 @@ nav {
         text-align: left; /* Garante alinhamento à esquerda */
     }
 
-    .hero-content h1 { 
-        font-size: 2.8rem; /* Diminui para não quebrar feio */
-        line-height: 1;
+    /* Escala Premium Mobile - Impacto Máximo */
+    .main-title { 
+        line-height: 0.82 !important; 
+        max-width: 75% !important; /* Aumentei um pouco a área do texto */
+        margin-bottom: 12px !important;
     }
-
-    .hero-content .subtitle { 
-        font-size: 1.2rem; 
-        margin: 10px 0;
+    
+    .txt-small { font-size: 1.1rem !important; letter-spacing: 1px !important; }
+    .txt-massive { 
+        font-size: 3.8rem !important; /* CNH agora com destaque real */
+        letter-spacing: -2px !important; 
+    }
+    .txt-medium { font-size: 1.4rem !important; }
+    .txt-large { 
+        font-size: 3rem !important; /* APROVA agora com peso de cartaz */
+        letter-spacing: -1px !important; 
     }
 
     .hero-content .tagline { 
-        font-size: 0.9rem; 
-        margin-bottom: 30px;
+        font-size: 0.85rem !important; 
+        max-width: 65% !important; 
+        line-height: 1.2 !important;
+        margin-bottom: 25px !important;
     }
 
     /* 5. Ajuste do Painel de Preços (Agora Quadradinho e Compacto) */
@@ -668,8 +747,8 @@ nav {
         background: linear-gradient(to right, transparent, #7a1a1a, transparent);
     }
 
-    /* 6. Dobra 2 Mobile (Grid 2x2) */
-    .social-proof { padding: 40px 0; } /* Seção mais curta no mobile */
+    /* 6. Dobra 2 Mobile - Espaço reduzido para encostar na Hero e na Dobra 3 */
+    .social-proof { padding: 20px 0 0 0; }
     
     .proof-grid {
         grid-template-columns: 1fr 1fr; /* Mágica: 2 colunas no celular */
@@ -686,8 +765,8 @@ nav {
     .stars { font-size: 1.2rem; }
     .google-stars small { display: none; } /* Esconde o texto pequeno pra ganhar espaço */
 
-    /* Ajustes Dobra 3 Mobile Premium (Grid 2x2) */
-    .why-premium { padding: 50px 0; }
+    /* Ajustes Dobra 3 Mobile - Padronizado e colado na Dobra 4 */
+    .why-premium { padding: 20px 0 0 0; }
     .premium-layout { flex-direction: column; gap: 25px; }
     .premium-text-side h2 { font-size: 1.8rem; text-align: center; margin-bottom: 25px; }
     
@@ -710,8 +789,8 @@ nav {
     .experience-badge { right: 10px; top: -15px; padding: 10px; }
     .experience-badge strong { font-size: 1.2rem; }
     
-    /* Ajustes Dobra 4 Mobile */
-    .roadmap { padding: 60px 0; }
+    /* Ajustes Dobra 4 Mobile - Padronizado com as anteriores */
+    .roadmap { padding: 20px 0 40px 0; }
     .roadmap-header h2 { font-size: 1.8rem; }
     .roadmap-container { flex-direction: column; gap: 40px; }
     .roadmap-steps::before { left: 20px; }
