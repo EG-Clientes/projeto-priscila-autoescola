@@ -810,3 +810,128 @@ nav {
     .step-info h3 { font-size: 1.1rem; }
     .step-info p { font-size: 0.85rem; }
 }
+/* DOBRA 5: DEPOIMENTOS (ESTILO FIEL AO MODELO) */
+.testimonials {
+    padding: 10px 0 0 0; 
+    background: #000000; 
+}
+
+.testimonials-card-main {
+    background: var(--vinho-profundo);
+    padding: 30px 5%;
+    border-radius: 40px; 
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.testimonials-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.testimonials-header h2 {
+    font-size: 1.8rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+}
+
+.testimonials-header h2 span { color: #f37021; }
+
+.carousel-wrapper {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.carousel-container {
+    overflow: hidden;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.testimonial-slide {
+    min-width: calc(33.33% - 14px); /* 3 cards no desktop */
+}
+
+/* O CARD EXATO DO PRINT */
+.depo-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1.5px solid rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.depo-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.depo-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 204, 0, 0.3);
+}
+
+.depo-name-stars {
+    display: flex;
+    flex-direction: column;
+}
+
+.depo-name-stars .stars {
+    color: var(--gold);
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.depo-name-stars .author {
+    color: var(--white);
+    font-weight: 800;
+    font-size: 1.1rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.depo-txt {
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.8);
+    margin-top: 5px;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dot.active { background: var(--gold); }
+
+/* AJUSTE MOBILE */
+@media (max-width: 768px) {
+    .testimonial-slide { min-width: 100%; }
+    .carousel-track { gap: 0; }
+    .depo-card { padding: 25px; }
+    .depo-img { width: 70px; height: 70px; }
+    .depo-name-stars .author { font-size: 1rem; }
+    .depo-txt { font-size: 0.85rem; }
+}

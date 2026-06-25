@@ -74,3 +74,45 @@ function initPremiumCounters() {
 
 // Inicia a função sem interferir no DOMContentLoaded original
 initPremiumCounters();
+// --- LÓGICA DO CARROSSEL DE DEPOIMENTOS ---
+function initCarousel() {
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.carousel-btn.next');
+    const prevButton = document.querySelector('.carousel-btn.prev');
+    const dots = document.querySelectorAll('.dot');
+    
+    let currentIndex = 0;
+
+    const updateCarousel = (index) => {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+    };
+
+    nextButton.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateCarousel(currentIndex);
+    });
+
+    prevButton.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateCarousel(currentIndex);
+    });
+
+    // Clique nos pontinhos
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            currentIndex = index;
+            updateCarousel(currentIndex);
+        });
+    });
+
+    // Auto Play (Opcional - roda a cada 5 segundos)
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateCarousel(currentIndex);
+    }, 5000);
+}
+
+initCarousel();
