@@ -710,6 +710,10 @@ nav {
     }
 
     /* 5. Ajuste do Painel de Preços (Agora Quadradinho e Compacto) */
+    .pricing-bar-wrapper {
+        margin-top: 100px; /* Aumenta o espaço superior para aproximar o card da base no mobile */
+    }
+
     .pricing-bar {
         flex-direction: column; 
         padding: 20px; /* Reduzi o espaço interno */
