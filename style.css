@@ -27,11 +27,21 @@ body {
 
 /* --- HEADER E MENU (Desktop e Mobile Corrigido) --- */
 header {
-    position: absolute;
+    position: fixed; 
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 2000;
     padding: 25px 0;
+    background: transparent; /* Inicia transparente integrado à Hero */
+    box-shadow: none;
+    transition: all 0.4s ease-in-out; /* Transição suave para a cor entrar */
+}
+
+/* Esta classe será adicionada via JS ao rolar a página */
+header.header-active {
+    background: var(--vinho-profundo); 
+    padding: 15px 0; /* Dá uma leve encolhida elegante ao rolar */
+    box-shadow: 0 5px 25px rgba(0,0,0,0.6);
 }
 
 nav {
@@ -547,7 +557,7 @@ nav {
 
 /* DOBRA 4: ROADMAP DA CNH */
 .roadmap {
-    padding: 30px 0 80px 0; /* Padronizado com 30px no topo para igualar as outras */
+    padding: 30px 0 10px 0; /* Reduzido para 10px para aproximar da próxima sessão */
     background: #000000; 
 }
 
@@ -801,7 +811,7 @@ nav {
     .experience-badge strong { font-size: 1.2rem; }
     
     /* Ajustes Dobra 4 Mobile - Padronizado com as anteriores */
-    .roadmap { padding: 20px 0 40px 0; }
+    .roadmap { padding: 20px 0 10px 0; }
     .roadmap-header h2 { font-size: 1.8rem; }
     .roadmap-container { flex-direction: column; gap: 40px; }
     .roadmap-steps::before { left: 20px; }
@@ -909,29 +919,261 @@ nav {
     margin-top: 5px;
 }
 
-.carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 25px;
-}
 
-.dot {
-    width: 10px;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    cursor: pointer;
-}
 
-.dot.active { background: var(--gold); }
-
-/* AJUSTE MOBILE */
+/* AJUSTE MOBILE - CARDS LINEARES */
 @media (max-width: 768px) {
-    .testimonial-slide { min-width: 100%; }
-    .carousel-track { gap: 0; }
+    .carousel-container { 
+        overflow-x: auto; 
+        -webkit-overflow-scrolling: touch; 
+        scroll-snap-type: x mandatory;
+        padding-bottom: 20px;
+    }
+    .carousel-container::-webkit-scrollbar { display: none; }
+    
+    .carousel-track { 
+        display: flex; 
+        gap: 15px; 
+    }
+    
+    .testimonial-slide { 
+        min-width: 85%; 
+        scroll-snap-align: center;
+    }
+
     .depo-card { padding: 25px; }
     .depo-img { width: 70px; height: 70px; }
     .depo-name-stars .author { font-size: 1rem; }
     .depo-txt { font-size: 0.85rem; }
+}
+
+/* ============================================================
+   SESSÃO ESPECIALIDADES (AMEIXA COM BORDAS DOURADAS)
+   ============================================================ */
+.specialties {
+    padding: 20px 0 60px 0; /* Reduzido de 100px para 20px para eliminar o espaço excessivo no topo */
+    background: #000000;
+}
+
+.specialties-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.special-tag {
+    color: var(--gold);
+    font-weight: 800;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+}
+
+.specialties-header h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-top: 10px;
+}
+
+.specialties-header h2 span { color: var(--gold); }
+
+.specialties-header p {
+    opacity: 0.7;
+    max-width: 600px;
+    margin: 20px auto 0;
+}
+
+.specialties-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.special-card {
+    background: var(--vinho-profundo); /* Cor padrão do site */
+    border: 2px solid var(--gold);    /* Borda dourada em destaque */
+    padding: 90px 30px 40px;          /* Aumentado para 90px para o ícone não colar no badge superior */
+    border-radius: 40px;              /* Mantendo o padrão de 40px do site */
+    text-align: center;
+    position: relative;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.special-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(255, 204, 0, 0.15);
+}
+
+.card-badge {
+    position: absolute;
+    top: 25px;
+    background: var(--gold);
+    color: #000;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.card-icon-wrap {
+    width: 85px;
+    height: 85px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--gold);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;             /* Aumentado para 35px para não colar no título abaixo */
+    transform: rotate(0deg);         /* Corrigido: Ícone agora fica reto */
+    transition: 0.3s;
+}
+
+.special-card:hover .card-icon-wrap {
+    transform: scale(1.1);           /* Removido o rotate(0deg) desnecessário */
+    background: var(--gold);
+}
+
+.card-icon-wrap img {
+    width: 45px;
+    filter: invert(1);
+}
+
+.special-card:hover .card-icon-wrap img {
+    filter: invert(0);
+}
+
+.special-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 15px;
+}
+
+.special-card p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    margin-bottom: 30px;
+    flex-grow: 1;
+}
+
+.btn-special {
+    text-decoration: none;
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: 800;
+    font-size: 0.85rem;
+    border: 1.5px solid var(--gold);
+    padding: 12px 30px;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+
+.btn-special:hover {
+    background: var(--gold);
+    color: #000;
+}
+
+/* RESPONSIVIDADE MOBILE */
+@media (max-width: 992px) {
+    .specialties-grid { grid-template-columns: 1fr; gap: 40px; }
+    .special-card { max-width: 100%; }
+    .specialties-header h2 { font-size: 2.2rem; }
+}
+
+/* ============================================================
+   FOOTER PREMIUM DEFINITIVO
+   ============================================================ */
+.main-footer {
+    background: var(--vinho-profundo);
+    padding: 80px 0 30px 0;
+    margin-top: 50px;
+    border-top: 2px solid var(--gold);
+    border-radius: 50px 50px 0 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 40px;
+    padding-bottom: 50px;
+}
+
+.footer-col h4 {
+    font-family: 'Outfit', sans-serif;
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-desc {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.8;
+    max-width: 300px;
+}
+
+.footer-social { margin-top: 20px; }
+.footer-social a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--white);
+    transition: 0.3s;
+}
+.footer-social a img { width: 24px; filter: invert(1); }
+.footer-social a:hover { color: var(--gold); }
+
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul li a {
+    text-decoration: none;
+    color: var(--white);
+    font-size: 0.95rem;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+.footer-col ul li a:hover { color: var(--gold); padding-left: 5px; opacity: 1; }
+
+.contact-info p { font-size: 0.9rem; margin-bottom: 15px; opacity: 0.8; line-height: 1.5; }
+.contact-info strong { color: var(--gold); display: block; margin-bottom: 2px; }
+
+/* RODAPÉ FINAL - CENTRALIZADO PARA TODAS AS TELAS */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.85rem;
+    gap: 8px;
+}
+
+.dev-credits a {
+    color: var(--gold) !important;
+    text-decoration: none;
+    font-weight: 800;
+}
+
+/* RESPONSIVIDADE MOBILE */
+@media (max-width: 768px) {
+    .main-footer { padding: 60px 0 30px 0; border-radius: 30px 30px 0 0; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; justify-items: center; }
+    .footer-col { display: flex; flex-direction: column; align-items: center; width: 100%; }
+    .footer-col .logo { justify-content: center; margin: 0 auto; }
+    .footer-col .logo-text { text-align: left; }
+    .footer-desc { max-width: 85%; margin: 20px auto 0 auto; }
+    .footer-social a { justify-content: center; }
+    .footer-col ul li a:hover { padding-left: 0; }
 }
