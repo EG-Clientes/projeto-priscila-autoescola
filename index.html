@@ -148,12 +148,17 @@ function gtag_report_conversion(url) {
                             <!-- Linha Divisória -->
                             <div class="divider"></div>
 
-                            <!-- INJEÇÃO CIRÚRGICA: Trava os 2 primeiros cards para não quebrarem a linha (sem mexer no seu CSS) -->
+                            <!-- INJEÇÃO CIRÚRGICA: Trava textos no desktop e cria o respiro no fundo do mobile -->
                             <style>
                                 @media (min-width: 769px) {
                                     .pricing-bar .price-item:nth-child(1) .price-info,
                                     .pricing-bar .price-item:nth-child(3) .price-info {
                                         white-space: nowrap;
+                                    }
+                                }
+                                @media (max-width: 768px) {
+                                    .pricing-bar-wrapper {
+                                        margin-bottom: 25px; /* Cria os milímetros de respiro no fundo da hero */
                                     }
                                 }
                             </style>
