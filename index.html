@@ -145,6 +145,31 @@ function gtag_report_conversion(url) {
                                     <span class="btn-mini-cta">QUERO O COMBO ></span>
                                 </div>
                             </a>
+                            <!-- Linha Divisória -->
+                            <div class="divider"></div>
+
+                            <!-- INJEÇÃO CIRÚRGICA: Trava os 2 primeiros cards para não quebrarem a linha (sem mexer no seu CSS) -->
+                            <style>
+                                @media (min-width: 769px) {
+                                    .pricing-bar .price-item:nth-child(1) .price-info,
+                                    .pricing-bar .price-item:nth-child(3) .price-info {
+                                        white-space: nowrap;
+                                    }
+                                }
+                            </style>
+
+                            <!-- Bloco Adição e Reciclagem -->
+                            <a href="https://wa.me/551111934017120?text=Olá! Quero informações sobre Adição de Categoria e Reciclagem" class="price-item" target="_blank" onclick="gtag_report_conversion();">
+                                <div class="price-icon">
+                                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='none' stroke='%2300e5ff' stroke-width='12'/><circle cx='50' cy='50' r='14' fill='%2300e5ff'/><line x1='36' y1='50' x2='12' y2='50' stroke='%23ffcc00' stroke-width='10' stroke-linecap='round'/><line x1='64' y1='50' x2='88' y2='50' stroke='%23ffcc00' stroke-width='10' stroke-linecap='round'/><line x1='50' y1='64' x2='50' y2='88' stroke='%23ffcc00' stroke-width='10' stroke-linecap='round'/></svg>" alt="Volante" style="filter: none !important; width: 45px;">
+                                </div>
+                                <div class="price-info">
+                                    <span class="label">ADIÇÃO E RECICLAGEM</span>
+                                    <span class="sub-label">CATEGORIAS A, B, D</span>
+                                    <div class="price-value" style="font-size: 1.2rem; margin-top: 5px;">CONDIÇÃO ESPECIAL</div>
+                                    <span class="btn-mini-cta">SABER MAIS ></span>
+                                </div>
+                            </a>
                         </div>
                     </div>
 
